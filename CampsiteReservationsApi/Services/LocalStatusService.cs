@@ -5,14 +5,17 @@ namespace CampsiteReservationsApi.Services;
 public class LocalStatusService : ICheckTheStatus
 {
     private readonly ISystemTime _systemTime;
+    private readonly ILookupOnCallDevelopers _onCallDeveloperLookup;
 
-    public LocalStatusService(ISystemTime systemTime)
+    public LocalStatusService(ISystemTime systemTime, ILookupOnCallDevelopers onCallDeveloperLookup)
     {
         _systemTime = systemTime;
+        _onCallDeveloperLookup = onCallDeveloperLookup;
     }
 
-    public Task<GetStatusResponse> GetCurrentStatusAsync()
+    public async Task<GetStatusResponse> GetCurrentStatusAsync()
     {
-        return Task.FromResult(new GetStatusResponse("Looks Good", "Bob", _systemTime.GetCurrent()));
+        string emailAddressOfOnCallPerson = await _onCallDeveloperLookup.GetEmailAddressAsync();
+        return new GetStatusResponse("Looks Good", emailAddressOfOnCallPerson, _systemTime.GetCurrent());
     }
 }
