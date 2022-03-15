@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Xunit;
 using System.Text.Json;
 using System;
+using CampsiteReservationsApi.Models;
 
 namespace CampsiteReservationsApi.IntegrationTests.StatusResource;
 
@@ -43,18 +44,11 @@ public class GettingTheStatus : IClassFixture<CustomBlankWebApplicationFactory<P
 
         var content = await response.Content.ReadAsStringAsync();
 
-        var entity = JsonSerializer.Deserialize<StatusResponse>(content);
+        var entity = JsonSerializer.Deserialize<GetStatusResponse>(content);
 
-        Assert.Equal("Looks Good", entity?.status);
-        Assert.Equal("Bob", entity?.oncall);
 
+        Assert.Equal(entity, TestObjects.GetStubbedStatusResponse());
     }
 }
 
 
-public class StatusResponse
-{
-    public string status { get; set; }
-    public string oncall { get; set; }
-    public DateTime whenChecked { get; set; }
-}
