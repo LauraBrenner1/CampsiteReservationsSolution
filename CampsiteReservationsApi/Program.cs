@@ -1,7 +1,11 @@
+global using CampsiteReservationsApi.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
+// Add services to the container.
+builder.Services.AddSingleton<ISystemTime, SystemTime>();
+builder.Services.AddTransient<ICheckTheStatus, LocalStatusService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
