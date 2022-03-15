@@ -9,7 +9,7 @@ using Xunit;
 
 namespace CampsiteReservationsApi.IntegrationTests.StatusResource;
 
-public class GettingTheStataAlbaStyle : IClassFixture<StubbedFixtureWithStatus>
+public class GettingTheStataAlbaStyle : IClassFixture<StubbedFixtureWithStatus> 
 {
     private readonly IAlbaHost _host;
 

@@ -15,7 +15,16 @@ public class LocalStatusService : ICheckTheStatus
 
     public async Task<GetStatusResponse> GetCurrentStatusAsync()
     {
-        string emailAddressOfOnCallPerson = await _onCallDeveloperLookup.GetEmailAddressAsync();
-        return new GetStatusResponse("Looks Good", emailAddressOfOnCallPerson, _systemTime.GetCurrent());
+        var emailAddress = "";
+        try
+        {
+             emailAddress = await _onCallDeveloperLookup.GetEmailAddressAsync();
+        }
+        catch (UnableToProvideOnCallDeveloperException)
+        {
+
+            emailAddress = "laura@aol.com";
+        }
+        return new GetStatusResponse("Looks Good", emailAddress, _systemTime.GetCurrent());
     }
 }

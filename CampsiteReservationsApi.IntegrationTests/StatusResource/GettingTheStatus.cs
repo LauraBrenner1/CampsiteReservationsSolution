@@ -12,7 +12,7 @@ public class GettingTheStatus : IClassFixture<CustomBlankWebApplicationFactory<P
 {
 
     private readonly HttpClient _client;
-    private readonly HttpResponseMessage _response;
+  
     public GettingTheStatus(CustomBlankWebApplicationFactory<Program> factory)
     {
         _client = factory.CreateClient();
