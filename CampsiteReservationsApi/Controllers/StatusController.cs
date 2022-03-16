@@ -4,6 +4,7 @@ using CampsiteReservationsApi.Services;
 
 namespace CampsiteReservationsApi.Controllers;
 
+[ApiController]
 public class StatusController : ControllerBase
 {
     private readonly ICheckTheStatus _statusChecker;
@@ -25,7 +26,9 @@ public class StatusController : ControllerBase
 
     [HttpPost("/status")]
     public async Task<ActionResult> UpdateTheStatus([FromBody] PostStatusRequest request)
-    {
+    {   
+      
+        
         // ?? What has to happen here?
         return Accepted();
     }
