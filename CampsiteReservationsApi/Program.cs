@@ -1,4 +1,6 @@
 global using CampsiteReservationsApi.Services;
+using CampsiteReservationsApi.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +10,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpClient<OnCallApiService>( client =>
 {
     client.BaseAddress = new Uri(builder.Configuration.GetValue<string>("onCallApi"));
-}); 
+});
+
+builder.Services.AddDbContext<CampsiteReservationDataContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("camping"));
+});
+builder.Services.AddScoped<ILookupApiStatus, SqlServerOnCallDeveloperLookup>();
 builder.Services.AddSingleton<ISystemTime, SystemTime>();
 builder.Services.AddTransient<ILookupOnCallDevelopers, RemoteOnCallDeveloperLookup>();
 builder.Services.AddTransient<ICheckTheStatus, LocalStatusService>();
