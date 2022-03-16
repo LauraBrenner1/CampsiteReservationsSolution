@@ -19,7 +19,7 @@ public class LocalStatusService : ICheckTheStatus
         var emailAddress = "";
         try
         {
-             emailAddress = await _onCallDeveloperLookup.GetEmailAddressAsync();
+            emailAddress = await _onCallDeveloperLookup.GetEmailAddressAsync();
         }
         catch (UnableToProvideOnCallDeveloperException)
         {
@@ -27,7 +27,8 @@ public class LocalStatusService : ICheckTheStatus
             emailAddress = "laura@aol.com";
         }
 
-        string status = await _apiStatusLookup.GetCurrentStatusAsync();
+        string status = await _apiStatusLookup.GetCurrentStatusAsync() ?? "There is no history of status for this API";
+
 
         return new GetStatusResponse(status, emailAddress, _systemTime.GetCurrent());
     }

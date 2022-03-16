@@ -12,7 +12,7 @@ public class SqlServerOnCallDeveloperLookup : ILookupApiStatus
         _context = context;
     }
 
-    public async Task<string> GetCurrentStatusAsync()
+    public async Task<string?> GetCurrentStatusAsync()
     {
         // find the status message of the status row that has the most recent checkedattime
         var lastStatus = await _context.StatusInformation?
@@ -20,6 +20,6 @@ public class SqlServerOnCallDeveloperLookup : ILookupApiStatus
             .Select(s => s.Status)
             .FirstOrDefaultAsync();
 
-        return lastStatus ?? "No Status Information Recorded";
+        return lastStatus; // This is sus according to my test.
     }
 }

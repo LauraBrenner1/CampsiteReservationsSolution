@@ -2,5 +2,5 @@
 
 public interface ILookupApiStatus
 {
-    Task<string> GetCurrentStatusAsync();
+    Task<string?> GetCurrentStatusAsync();
 }
