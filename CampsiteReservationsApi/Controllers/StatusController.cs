@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using CampsiteReservationsApi.Models;
 using CampsiteReservationsApi.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CampsiteReservationsApi.Controllers;
 
@@ -24,10 +25,13 @@ public class StatusController : ControllerBase
         return Ok(response);
     }
 
+    [Authorize]
     [HttpPost("/status")]
     public async Task<ActionResult> UpdateTheStatus([FromBody] PostStatusRequest request)
-    {   
-      
+    {
+
+        var sub = User?.GetSub();
+        var userName = User?.GetPreferredUserName();
         
         // ?? What has to happen here?
         return Accepted();
