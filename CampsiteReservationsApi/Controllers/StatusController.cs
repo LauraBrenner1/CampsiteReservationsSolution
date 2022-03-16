@@ -9,10 +9,12 @@ namespace CampsiteReservationsApi.Controllers;
 public class StatusController : ControllerBase
 {
     private readonly ICheckTheStatus _statusChecker;
+    private readonly IUpdateTheStatus _statusUpdater;
 
-    public StatusController(ICheckTheStatus statusChecker)
+    public StatusController(ICheckTheStatus statusChecker, IUpdateTheStatus statusUpdater)
     {
         _statusChecker = statusChecker;
+        _statusUpdater = statusUpdater;
     }
 
     [HttpGet("/status")]
@@ -32,9 +34,16 @@ public class StatusController : ControllerBase
 
         var sub = User?.GetSub();
         var userName = User?.GetPreferredUserName();
-        
-        // ?? What has to happen here?
-        return Accepted();
+
+        if (sub is null || userName is null)
+        {
+            return StatusCode(403);
+        }
+        else
+        {
+            await _statusUpdater.UpdateStatusAsync(request.status, sub, userName);
+            return Accepted();
+        }
     }
 }
 

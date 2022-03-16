@@ -23,7 +23,8 @@ builder.Services.AddDbContext<CampsiteReservationDataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("camping"));
 });
-builder.Services.AddScoped<ILookupApiStatus, SqlServerOnCallDeveloperLookup>();
+builder.Services.AddScoped<ILookupApiStatus, SqlServerStatus>();
+builder.Services.AddScoped<IUpdateTheStatus, SqlServerStatus>();
 builder.Services.AddSingleton<ISystemTime, SystemTime>();
 builder.Services.AddTransient<ILookupOnCallDevelopers, RemoteOnCallDeveloperLookup>();
 builder.Services.AddTransient<ICheckTheStatus, LocalStatusService>();

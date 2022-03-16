@@ -17,4 +17,7 @@ public class StatusInformation
     public int Id { get; set; } 
     public string Status { get; set; } = string.Empty;
     public DateTime CheckedAt { get; set; }
+
+    public string UpdatedBy { get; set; } = string.Empty;
+    public string SubOfUpdated { get; set; } = string.Empty;
 }
