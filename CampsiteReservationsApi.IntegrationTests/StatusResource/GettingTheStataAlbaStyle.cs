@@ -21,6 +21,7 @@ public class GettingTheStataAlbaStyle : IClassFixture<StubbedFixtureWithStatus>
     [Fact]
     public async Task CanGetStatus()
     {
+        // When
        var result = await _host.Scenario(api =>
         {
             api.Get.Url("/status");
@@ -29,11 +30,13 @@ public class GettingTheStataAlbaStyle : IClassFixture<StubbedFixtureWithStatus>
 
         var fromApi = result.ReadAsJson<GetStatusResponse>();
 
+        // Then
         Assert.Equal(TestObjects.GetStubbedStatusResponse(), fromApi);
     }
 }
 
 
+// "Given" 
 public class StubbedFixtureWithStatus : WebAppFixture
 {
     protected override void BuildServices(IServiceCollection builder)
