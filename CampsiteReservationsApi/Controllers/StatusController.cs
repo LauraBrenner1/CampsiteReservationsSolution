@@ -22,6 +22,13 @@ public class StatusController : ControllerBase
 
         return Ok(response);
     }
+
+    [HttpPost("/status")]
+    public async Task<ActionResult> UpdateTheStatus([FromBody] PostStatusRequest request)
+    {
+        // ?? What has to happen here?
+        return Accepted();
+    }
 }
 
 
