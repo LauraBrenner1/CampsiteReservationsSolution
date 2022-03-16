@@ -1,7 +1,8 @@
-﻿using Alba;
-using CampsiteReservationsApi.IntegrationTests.AlbaFixtures;
-using CampsiteReservationsApi.Models;
-using CampsiteReservationsApi.Services;
+﻿global using Xunit;
+global using Alba;
+global using CampsiteReservationsApi.IntegrationTests.AlbaFixtures;
+global using CampsiteReservationsApi.Models;
+global using CampsiteReservationsApi.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using System;
@@ -9,7 +10,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Xunit;
 
 namespace CampsiteReservationsApi.IntegrationTests.StatusResource;
 
