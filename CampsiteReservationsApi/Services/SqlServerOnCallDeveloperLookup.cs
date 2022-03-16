@@ -15,7 +15,7 @@ public class SqlServerOnCallDeveloperLookup : ILookupApiStatus
     public async Task<string> GetCurrentStatusAsync()
     {
         // find the status message of the status row that has the most recent checkedattime
-        var lastStatus = await _context.StatusInformation
+        var lastStatus = await _context.StatusInformation?
             .OrderByDescending(s => s.CheckedAt)
             .Select(s => s.Status)
             .FirstOrDefaultAsync();
